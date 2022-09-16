@@ -1,0 +1,56 @@
+int pinSensor =2;
+
+
+int pinBuzzer =13;
+int pirSensor =0;
+float sensor=A0;
+float analog;
+float tempv;
+float tempc;
+float tempf;
+
+void setup()
+{
+  pinMode(pinSensor, INPUT);
+  pinMode(sensor, INPUT);
+  pinMode(pinBuzzer, OUTPUT);
+   Serial.begin(9600);
+
+}
+
+void loop()
+{
+  
+  analog=analogRead(sensor);
+ 
+    tempv=analog*5.0/1023;
+  tempc=(tempv-0.5)*100.0;
+  tempf=((tempc*9.0)/5.0)+32.0;
+  
+   
+  Serial.print("temperature:");
+  Serial.println(tempc);
+  if (tempc >=60)
+  {
+  
+    
+    tone(pinBuzzer, 200, 100);
+  
+  }
+  delay(100);
+    
+  pirSensor = digitalRead(pinSensor);
+  
+
+  if (pirSensor == HIGH)
+  {
+  
+    
+    tone(pinBuzzer, 1000, 500);
+  
+  }
+  
+  
+  
+  delay(100);
+}
